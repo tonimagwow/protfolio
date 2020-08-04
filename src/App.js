@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Layout from './Layout';
+import HomepageSections from './Components/HomepageSections';
+import Footer from './Components/Footer';
+import { getContentfulNav } from './Queries/index';
+import * as headings from './Styles/type';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  let [data, setData] = useState({});
+
+  const getData = async () => {
+    const theData = await getContentfulNav();
+    setData(theData);
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  
+  if (data.fields) {
+    return (
+      <Layout>
+        <headings.HeaderOne>{
+          data.fields.websiteTitle}
+        </headings.HeaderOne>
+        <headings.HeaderTwo larger>
+          {data.fields.websiteSubtitle}
+        </headings.HeaderTwo>
+        <headings.BannerImage>
+          <img 
+            src={data.fields.bannerImage.fields.file.url}
+            alt={data.fields.bannerImage.fields.title}
+          />
+        </headings.BannerImage>
+        <HomepageSections />
+        <Footer data={data} />
+      </Layout>
+    );
+  }
+
+  return <Layout>...loading</Layout>
+
 }
 
 export default App;
