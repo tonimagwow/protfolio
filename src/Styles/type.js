@@ -11,11 +11,11 @@ export const HeaderOne = styled.h1`
 `;
 
 export const HeaderTwo = styled.h2`
-    font-size: ${props => props.larger ? '3rem' : '1.6rem'};
+    font-size: ${props => props.larger ? '2rem' : '1.6rem'};
     text-align: ${props => props.align ? props.align : 'initial'};
     margin: 3rem 0;
     @media screen and (min-width: 768px) {
-        font-size: ${props => props.larger ? '6rem' : '1.6rem'};
+        font-size: ${props => props.larger ? '2rem' : '1.6rem'};
     }
 `;
 
@@ -40,6 +40,7 @@ export const BannerImage = styled.div `
     }    
 `;
 
+// About Me body
 export const BodyText = styled.div`
     font-size 1rem;
     line-height: 1.8em;
@@ -48,5 +49,6 @@ export const BodyText = styled.div`
         line-height: 2.2em
         max-width: 800px;
         margin: 0 auto;
+        
     }
 `;
